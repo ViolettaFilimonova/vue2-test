@@ -22,8 +22,8 @@ describe("Counter", () => {
 
       it("increments by one when + button clicked", async () => {
         createComponent()
-        findPlusButton().trigger("click")
-        await nextTick()
+        await findPlusButton().trigger("click")
+    
         expect(wrapper.text()).toContain('1')
       });
     });
