@@ -28,10 +28,20 @@ describe("Counter", () => {
         await findButtonByText(buttonText).trigger("click")
         expect(wrapper.text()).toContain(expectedResult)
       });
-
-    //   it("increments by one when + button clicked", async () => {
-    //     createComponent()
-    //     await findPlusButton().trigger("click")
-    //     expect(wrapper.text()).toContain('1')
-    //   });
+      it("shows resrt button when counter is below 0",async () => {
+        createComponent()
+        // wrapper.vm.counter = -1
+        // await wrapper.vm.$nextTick()
+        await findButtonByText("-").trigger('click')
+        expect(wrapper.text()).toContain('-1')
+        expect(findButtonByText("Reset").exists()).toBe(true)
+      });
+      it("does not shows resrt button when counter is not below 0",async () => {
+        createComponent()
+        // wrapper.vm.counter = 1
+        // await wrapper.vm.$nextTick()
+        await findButtonByText("+").trigger('click')
+        expect(wrapper.text()).toContain('1')
+        expect(findButtonByText("Reset")).toBe(undefined)
+      });
     });
